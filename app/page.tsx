@@ -166,7 +166,7 @@ const Home: React.FC = () => {
       {/* Navigation */}
       <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center p-4">
         <motion.nav
-          className={`flex items-center justify-between max-w-5xl w-full rounded-full px-8 py-4 transition-all duration-300 ${
+          className={`flex items-center justify-between max-w-5xl w-full rounded-full px-8 py-4 transition-all duration-300 border border-gray-700 ${
             isScrolled
               ? "bg-gray-750/85 backdrop-blur-md shadow-lg"
               : "bg-gray-900/40 backdrop-blur-sm"
