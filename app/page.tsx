@@ -45,13 +45,14 @@ const Home: React.FC = () => {
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <div className="min-h-screen">
+    // Added overflow-x-hidden to prevent horizontal scrolling
+    <div className="min-h-screen overflow-x-hidden">
       {/* Navigation */}
       <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center p-4">
         <motion.nav
           className={`flex items-center justify-between max-w-5xl w-full rounded-full px-8 py-4 transition-all duration-300 ${
             isScrolled
-              ? "bg-black/70 backdrop-blur-md shadow-lg"
+              ? "bg-white/70 backdrop-blur-md shadow-lg" // Changed from bg-black/70 to bg-white/70
               : "bg-transparent"
           }`}
           initial={{ y: -100 }}
