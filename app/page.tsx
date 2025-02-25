@@ -168,7 +168,7 @@ const Home: React.FC = () => {
         <motion.nav
           className={`flex items-center justify-between max-w-5xl w-full rounded-full px-8 py-4 transition-all duration-300 ${
             isScrolled
-              ? "bg-gray-500/75 backdrop-blur-md shadow-lg"
+              ? "bg-gray-500/85 backdrop-blur-md shadow-lg"
               : "bg-gray-500/40 backdrop-blur-sm"
           }`}
           initial={{ y: -100 }}
@@ -197,14 +197,8 @@ const Home: React.FC = () => {
             >
               Docs
             </Link>
-            <Button
-              variant="ghost"
-              className="text-sm text-gray-200 hover:text-white"
-            >
-              Login
-            </Button>
             <Button className="text-sm bg-white text-gray-900 hover:bg-gray-100">
-              Register
+              Download
             </Button>
           </div>
         </motion.nav>
