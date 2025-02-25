@@ -178,12 +178,12 @@ const Home: React.FC = () => {
         >
           <div className="flex items-center space-x-4">
             <Link href="/" className="flex items-center space-x-2">
-              <img
-                src="/peer_sense_logo.jpg"
+              <Image
+                src="peer_sense_logo.jpg"
                 alt="Peer Sense AI Logo"
-                className="rounded-full"
                 width={40}
                 height={40}
+                className="rounded-full"
               />
 
               <span className="text-xl font-bold text-white">
@@ -475,12 +475,12 @@ const Home: React.FC = () => {
         <footer className="border-t border-gray-800 pt-12">
           <div className="max-w-5xl mx-auto flex flex-col items-center">
             <Link href="/" className="flex items-center space-x-2 mb-6">
-              <img
-                src="/peer_sense_logo.jpg"
+              <Image
+                src="peer_sense_logo.jpg"
                 alt="Peer Sense AI Logo"
-                className="rounded-full"
                 width={40}
                 height={40}
+                className="rounded-full"
               />
 
               <span className="text-xl font-bold">PEER SENSE AI</span>
