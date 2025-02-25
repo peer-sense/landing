@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion';
-import Link from 'next/link';
-import { ProductivityInsightsSection } from './components/ProductivityInsights';
+} from "@/components/ui/accordion";
+import Link from "next/link";
+import { ProductivityInsightsSection } from "./components/ProductivityInsights";
 import {
   Github,
   Mail,
@@ -21,60 +21,60 @@ import {
   Brain,
   Sliders,
   Rocket,
-} from 'lucide-react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { useRef, useEffect, useState, ReactNode } from 'react';
-import { TaskFlowAnimation } from './components/TaskFlowAnimation';
-import Image from 'next/image';
+} from "lucide-react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { useRef, useEffect, useState, ReactNode } from "react";
+import { TaskFlowAnimation } from "./components/TaskFlowAnimation";
+import Image from "next/image";
 
 // Add this new component after the existing imports
 const FeatureTiles = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const features = [
     {
-      title: 'Personalized Scheduling for Individuals',
+      title: "Personalized Scheduling for Individuals",
       description:
-        'Optimize your daily routine and boost productivity with AI-driven personal scheduling.',
+        "Optimize your daily routine and boost productivity with AI-driven personal scheduling.",
       icon: <User className="w-12 h-12 text-primary" />,
       features: [
-        'Smart task prioritization based on your energy levels',
-        'Personalized work-life balance recommendations',
-        'Adaptive scheduling that learns from your habits',
+        "Smart task prioritization based on your energy levels",
+        "Personalized work-life balance recommendations",
+        "Adaptive scheduling that learns from your habits",
       ],
     },
     {
-      title: 'Enterprise-Grade Scheduling Solutions',
+      title: "Enterprise-Grade Scheduling Solutions",
       description:
         "Streamline your organization's workflow with our corporate scheduling AI.",
       icon: <Briefcase className="w-12 h-12 text-primary" />,
       features: [
-        'Efficient team coordination and resource allocation',
-        'Automated meeting scheduling across departments',
-        'Data-driven insights for optimizing corporate productivity',
+        "Efficient team coordination and resource allocation",
+        "Automated meeting scheduling across departments",
+        "Data-driven insights for optimizing corporate productivity",
       ],
     },
     {
-      title: 'Enhance Team Collaboration',
+      title: "Enhance Team Collaboration",
       description:
-        'Foster seamless teamwork with AI-powered group scheduling and task management.',
+        "Foster seamless teamwork with AI-powered group scheduling and task management.",
       icon: <Users className="w-12 h-12 text-primary" />,
       features: [
-        'Intelligent meeting time suggestions for optimal attendance',
-        'Collaborative task boards with AI-assisted assignments',
-        'Real-time updates and notifications for team members',
+        "Intelligent meeting time suggestions for optimal attendance",
+        "Collaborative task boards with AI-assisted assignments",
+        "Real-time updates and notifications for team members",
       ],
     },
     {
-      title: 'Insightful Analytics Dashboard',
+      title: "Insightful Analytics Dashboard",
       description:
-        'Gain valuable insights into your productivity and team performance.',
+        "Gain valuable insights into your productivity and team performance.",
       icon: <BarChart className="w-12 h-12 text-primary" />,
       features: [
-        'Comprehensive productivity reports and trends',
-        'Time allocation analysis for individuals and teams',
-        'AI-generated recommendations for efficiency improvements',
+        "Comprehensive productivity reports and trends",
+        "Time allocation analysis for individuals and teams",
+        "AI-generated recommendations for efficiency improvements",
       ],
     },
   ];
@@ -101,7 +101,7 @@ const FeatureTiles = () => {
           className="grid grid-cols-1 md:grid-cols-2 gap-8"
           variants={containerVariants}
           initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
+          animate={isInView ? "visible" : "hidden"}
         >
           {features.map((feature, index) => (
             <motion.div
@@ -169,22 +169,23 @@ const Home: React.FC = () => {
         <motion.nav
           className={`flex items-center justify-between max-w-5xl w-full rounded-full px-8 py-4 transition-all duration-300 border border-gray-5000 ${
             isScrolled
-              ? 'bg-blue-550/85 backdrop-blur-md shadow-lg'
-              : 'bg-blue-998/40 backdrop-blur-sm'
+              ? "bg-blue-550/85 backdrop-blur-md shadow-lg"
+              : "bg-blue-998/40 backdrop-blur-sm"
           }`}
           initial={{ y: -100 }}
           animate={{ y: 0 }}
-          transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+          transition={{ type: "spring", stiffness: 100, damping: 20 }}
         >
           <div className="flex items-center space-x-4">
             <Link href="/" className="flex items-center space-x-2">
-              <Image
+              <img
                 src="/peer_sense_logo.jpg"
                 alt="Peer Sense AI Logo"
+                className="rounded-full"
                 width={40}
                 height={40}
-                className="rounded-full"
               />
+
               <span className="text-xl font-bold text-white">
                 PEER SENSE AI
               </span>
@@ -389,7 +390,7 @@ const Home: React.FC = () => {
               </AccordionTrigger>
               <AccordionContent>
                 No, but the AI <em>adjusts dynamically</em> based on your work
-                patterns. If your schedule feels incorrect, go to{' '}
+                patterns. If your schedule feels incorrect, go to{" "}
                 <em>Settings - Work Preferences</em> and adjust your scheduling
                 needs.
               </AccordionContent>
@@ -399,7 +400,7 @@ const Home: React.FC = () => {
                 Does PeerSense AI support team-wide scheduling?
               </AccordionTrigger>
               <AccordionContent>
-                Yes! It syncs with your teams Google Calendars to{' '}
+                Yes! It syncs with your teams Google Calendars to{" "}
                 <em>optimize meeting times</em> and collaboration.
               </AccordionContent>
             </AccordionItem>
@@ -474,13 +475,14 @@ const Home: React.FC = () => {
         <footer className="border-t border-gray-800 pt-12">
           <div className="max-w-5xl mx-auto flex flex-col items-center">
             <Link href="/" className="flex items-center space-x-2 mb-6">
-              <Image
+              <img
                 src="/peer_sense_logo.jpg"
                 alt="Peer Sense AI Logo"
-                width={50}
-                height={50}
                 className="rounded-full"
+                width={40}
+                height={40}
               />
+
               <span className="text-xl font-bold">PEER SENSE AI</span>
             </Link>
             <p className="text-sm text-muted-foreground">
@@ -498,7 +500,7 @@ export default Home;
 // AIIntegrationShowcase Component
 const AIIntegrationShowcase: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -507,34 +509,34 @@ const AIIntegrationShowcase: React.FC = () => {
 
   const aiFeatures = [
     {
-      title: 'Personality-Based Scheduling',
+      title: "Personality-Based Scheduling",
       description:
-        'Adapts tasks based on your personality type and suggests optimal times for deep work, meetings, and relaxation.',
+        "Adapts tasks based on your personality type and suggests optimal times for deep work, meetings, and relaxation.",
     },
     {
-      title: 'AI-Powered Task Optimization',
+      title: "AI-Powered Task Optimization",
       description:
-        'Prioritizes tasks based on urgency and your productivity patterns, automatically adjusting schedules for high-priority tasks.',
+        "Prioritizes tasks based on urgency and your productivity patterns, automatically adjusting schedules for high-priority tasks.",
     },
     {
-      title: 'Peer Collaboration & Influence',
+      title: "Peer Collaboration & Influence",
       description:
-        'Syncs with team members schedules to optimize group work and avoid conflicts by suggesting the best meeting times.',
+        "Syncs with team members schedules to optimize group work and avoid conflicts by suggesting the best meeting times.",
     },
     {
-      title: 'Real-Time Adjustments',
+      title: "Real-Time Adjustments",
       description:
-        'Detects changes in your work patterns and mood, rescheduling tasks on the fly for enhanced productivity.',
+        "Detects changes in your work patterns and mood, rescheduling tasks on the fly for enhanced productivity.",
     },
     {
-      title: 'Smart Notifications & Reminders',
+      title: "Smart Notifications & Reminders",
       description:
-        'Keeps you informed with timely alerts for task deadlines, scheduling conflicts, and changes, ensuring you never miss a beat.',
+        "Keeps you informed with timely alerts for task deadlines, scheduling conflicts, and changes, ensuring you never miss a beat.",
     },
     {
-      title: 'Seamless Integrations',
+      title: "Seamless Integrations",
       description:
-        'Effortlessly connects with Google Calendar, Slack, and more to keep your schedule synchronized across platforms.',
+        "Effortlessly connects with Google Calendar, Slack, and more to keep your schedule synchronized across platforms.",
     },
   ];
 
@@ -548,7 +550,7 @@ const AIIntegrationShowcase: React.FC = () => {
         ref={ref}
         className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
         initial="hidden"
-        animate={isInView ? 'visible' : 'hidden'}
+        animate={isInView ? "visible" : "hidden"}
         variants={{
           visible: {
             transition: {
@@ -579,7 +581,7 @@ const AIIntegrationShowcase: React.FC = () => {
 // CustomizationOptions Component
 const CustomizationOptions: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const containerVariants = {
     hidden: {},
@@ -596,12 +598,12 @@ const CustomizationOptions: React.FC = () => {
   };
 
   const options: string[] = [
-    'Personalized UI themes',
-    'Custom notification settings',
-    'Flexible scheduling rules',
-    'Integration with your favorite tools',
-    'Customizable AI behavior',
-    'Tailored reporting and analytics',
+    "Personalized UI themes",
+    "Custom notification settings",
+    "Flexible scheduling rules",
+    "Integration with your favorite tools",
+    "Customizable AI behavior",
+    "Tailored reporting and analytics",
   ];
 
   return (
@@ -614,7 +616,7 @@ const CustomizationOptions: React.FC = () => {
         ref={ref}
         variants={containerVariants}
         initial="hidden"
-        animate={isInView ? 'visible' : 'hidden'}
+        animate={isInView ? "visible" : "hidden"}
       >
         {options.map((option, index) => (
           <motion.div
@@ -645,7 +647,7 @@ const CustomizationOptions: React.FC = () => {
 // GettingStartedSteps Component
 const GettingStartedSteps: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const containerVariants = {
     hidden: {},
@@ -662,18 +664,18 @@ const GettingStartedSteps: React.FC = () => {
   };
 
   const steps = [
-    { title: 'Sign Up', description: 'Create your PeerSense AI account' },
+    { title: "Sign Up", description: "Create your PeerSense AI account" },
     {
-      title: 'Connect Calendar',
-      description: 'Integrate with your existing calendar',
+      title: "Connect Calendar",
+      description: "Integrate with your existing calendar",
     },
     {
-      title: 'Set Preferences',
-      description: 'Customize AI to match your work style',
+      title: "Set Preferences",
+      description: "Customize AI to match your work style",
     },
     {
-      title: 'Start Scheduling',
-      description: 'Let AI optimize your daily routine',
+      title: "Start Scheduling",
+      description: "Let AI optimize your daily routine",
     },
   ];
 
@@ -688,7 +690,7 @@ const GettingStartedSteps: React.FC = () => {
         className="grid gap-6 md:grid-cols-2 lg:grid-cols-4"
         variants={containerVariants}
         initial="hidden"
-        animate={isInView ? 'visible' : 'hidden'}
+        animate={isInView ? "visible" : "hidden"}
       >
         {steps.map((step, index) => (
           <motion.div
@@ -727,14 +729,14 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   description,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <Card className="bg-black border-gray-800 transition-all duration-300 hover:border-primary/50">
         <CardContent className="p-6">
@@ -763,14 +765,14 @@ const Section: React.FC<SectionProps> = ({
   children,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <motion.section
       ref={ref}
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
       className="py-24 px-4"
     >
       <div className="max-w-5xl mx-auto">
@@ -832,7 +834,7 @@ interface TestimonialCardProps {
 // TestimonialCard Component
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ quote, author }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-50px' });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <motion.div
