@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import Link from "next/link"
-import ProductivityInsights from "./components/ProductivityInsights"
+import { ProductivityInsightsSection } from "./components/ProductivityInsights"
 import {
   Github,
   Mail,
@@ -20,11 +20,9 @@ import {
 } from "lucide-react"
 import { motion, useScroll, useTransform, useInView, useSpring } from "framer-motion"
 import { useRef, useEffect, useState } from "react"
-
-// ... (rest of the imports and component definitions remain the same)
+import { TaskFlowAnimation } from "./components/TaskFlowAnimation"
 
 export default function Home() {
-  // ... (previous state and refs remain the same)
   const [isScrolled, setIsScrolled] = useState(false)
   const { scrollY } = useScroll()
 
@@ -44,43 +42,51 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 transition-all duration-300 ${isScrolled ? "bg-black/70 backdrop-blur-md" : ""}`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: "spring", stiffness: 100, damping: 20 }}
-      >
-        <div className="flex items-center space-x-2">
-          <span className="text-xl font-bold">PEER SENSE AI</span>
-        </div>
-        <div className="flex items-center space-x-6">
-          <Link href="/" className="text-sm hover:text-primary">
-            Home
-          </Link>
-          <Link href="/events" className="text-sm hover:text-primary">
-            Events
-          </Link>
-          <Link href="/docs" className="text-sm hover:text-primary">
-            Docs
-          </Link>
-          <Button variant="ghost" className="text-sm">
-            Login
-          </Button>
-          <Button className="text-sm">Register</Button>
-        </div>
-      </motion.nav>
+      <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center p-4">
+        <motion.nav
+          className={`flex items-center justify-between max-w-5xl w-full rounded-full px-8 py-4 transition-all duration-300 ${
+            isScrolled ? "bg-black/70 backdrop-blur-md shadow-lg" : "bg-transparent"
+          }`}
+          initial={{ y: -100 }}
+          animate={{ y: 0 }}
+          transition={{ type: "spring", stiffness: 100, damping: 20 }}
+        >
+          <div className="flex items-center space-x-2">
+            <span className="text-xl font-bold">PEER SENSE AI</span>
+          </div>
+          <div className="flex items-center space-x-6">
+            <Link href="/" className="text-sm hover:text-primary">
+              Home
+            </Link>
+            <Link href="/events" className="text-sm hover:text-primary">
+              Events
+            </Link>
+            <Link href="/docs" className="text-sm hover:text-primary">
+              Docs
+            </Link>
+            <Button variant="ghost" className="text-sm">
+              Login
+            </Button>
+            <Button className="text-sm">Register</Button>
+          </div>
+        </motion.nav>
+      </div>
 
       {/* Hero Section */}
       <motion.section
         ref={heroRef}
-        className="py-24 text-center space-y-6 min-h-screen flex flex-col justify-center items-center"
+        className="relative py-32 text-center space-y-6 min-h-screen flex flex-col justify-center items-center"
         initial={{ opacity: 0 }}
         animate={isHeroInView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        <motion.div style={{ y: heroTextY, opacity: heroOpacity }}>
+        <TaskFlowAnimation />
+        <motion.div 
+          style={{ y: heroTextY, opacity: heroOpacity }}
+          className="relative z-10"
+        >
           <motion.h1
-            className="text-4xl md:text-6xl font-bold max-w-3xl mx-auto"
+            className="text-4xl md:text-6xl font-bold max-w-3xl mx-auto bg-clip-text"
             initial={{ y: 20, opacity: 0 }}
             animate={isHeroInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -98,7 +104,7 @@ export default function Home() {
           </motion.p>
         </motion.div>
         <motion.div
-          className="flex justify-center gap-4 mt-8"
+          className="flex justify-center gap-4 mt-8 relative z-10"
           initial={{ y: 20, opacity: 0 }}
           animate={isHeroInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
@@ -114,7 +120,7 @@ export default function Home() {
       <AIIntegrationShowcase />
 
       {/* Productivity Insights */}
-      <ProductivityInsights />
+      <ProductivityInsightsSection />
 
       {/* Customization Options */}
       <CustomizationOptions />
@@ -324,8 +330,6 @@ export default function Home() {
   )
 }
 
-// ... (rest of the component definitions remain the same)
-
 function AIIntegrationShowcase() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
@@ -389,44 +393,6 @@ function AIIntegrationShowcase() {
             </Card>
           </motion.div>
         ))}
-      </motion.div>
-    </Section>
-  )
-}
-
-function ProductivityInsights() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
-  const progress = useSpring(0, { stiffness: 50, damping: 20 })
-
-  useEffect(() => {
-    if (isInView) {
-      progress.set(100)
-    }
-  }, [isInView, progress])
-
-  return (
-    <Section
-      title="Productivity Insights"
-      description="Gain valuable insights into your work patterns and boost your efficiency"
-      icon={<LineChart className="w-12 h-12 text-primary" />}
-    >
-      <motion.div
-        ref={ref}
-        className="relative h-64 bg-gray-800 rounded-lg overflow-hidden"
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 1 }}
-      >
-        <motion.div className="absolute bottom-0 left-0 w-full bg-primary" style={{ height: progress }} />
-        <motion.div
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl font-bold"
-          initial={{ scale: 0 }}
-          animate={isInView ? { scale: 1 } : { scale: 0 }}
-          transition={{ type: "spring", stiffness: 260, damping: 20 }}
-        >
-          +30% Productivity
-        </motion.div>
       </motion.div>
     </Section>
   )
@@ -636,4 +602,3 @@ function TestimonialCard({ quote, author }) {
     </motion.div>
   )
 }
-
