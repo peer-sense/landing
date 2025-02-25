@@ -7,7 +7,7 @@ try {
 
 /** @type {import('next').NextConfig} */
 const isProd = process.env.NODE_ENV === "production";
-const repoName = "your-repo-name"; // Replace with your actual GitHub repo name
+const repoName = "landing"; // Replace with your actual GitHub repo name
 
 const nextConfig = {
   eslint: {
