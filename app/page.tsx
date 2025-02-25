@@ -265,9 +265,15 @@ const Home: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.5 }}
         >
           <Button size="lg">Get Started</Button>
-          <Button size="lg" variant="secondary">
-            Learn More
-          </Button>
+          <a
+            href="https://peer-sense.github.io/docs"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button size="lg" variant="secondary">
+              Learn More
+            </Button>
+          </a>
         </motion.div>
       </motion.section>
 
