@@ -34,7 +34,8 @@ const FeatureTiles = () => {
   const features = [
     {
       title: "Personalized Scheduling for Individuals",
-      description: "Optimize your daily routine and boost productivity with AI-driven personal scheduling.",
+      description:
+        "Optimize your daily routine and boost productivity with AI-driven personal scheduling.",
       icon: <User className="w-12 h-12 text-primary" />,
       features: [
         "Smart task prioritization based on your energy levels",
@@ -44,7 +45,8 @@ const FeatureTiles = () => {
     },
     {
       title: "Enterprise-Grade Scheduling Solutions",
-      description: "Streamline your organization's workflow with our corporate scheduling AI.",
+      description:
+        "Streamline your organization's workflow with our corporate scheduling AI.",
       icon: <Briefcase className="w-12 h-12 text-primary" />,
       features: [
         "Efficient team coordination and resource allocation",
@@ -54,7 +56,8 @@ const FeatureTiles = () => {
     },
     {
       title: "Enhance Team Collaboration",
-      description: "Foster seamless teamwork with AI-powered group scheduling and task management.",
+      description:
+        "Foster seamless teamwork with AI-powered group scheduling and task management.",
       icon: <Users className="w-12 h-12 text-primary" />,
       features: [
         "Intelligent meeting time suggestions for optimal attendance",
@@ -64,7 +67,8 @@ const FeatureTiles = () => {
     },
     {
       title: "Insightful Analytics Dashboard",
-      description: "Gain valuable insights into your productivity and team performance.",
+      description:
+        "Gain valuable insights into your productivity and team performance.",
       icon: <BarChart className="w-12 h-12 text-primary" />,
       features: [
         "Comprehensive productivity reports and trends",
@@ -111,7 +115,9 @@ const FeatureTiles = () => {
                 </div>
                 <h3 className="text-xl font-semibold">{feature.title}</h3>
               </div>
-              <p className="text-muted-foreground mb-6">{feature.description}</p>
+              <p className="text-muted-foreground mb-6">
+                {feature.description}
+              </p>
               <ul className="space-y-3">
                 {feature.features.map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-sm">
@@ -162,8 +168,8 @@ const Home: React.FC = () => {
         <motion.nav
           className={`flex items-center justify-between max-w-5xl w-full rounded-full px-8 py-4 transition-all duration-300 ${
             isScrolled
-              ? "bg-gray-900/75 backdrop-blur-md shadow-lg"
-              : "bg-gray-900/40 backdrop-blur-sm"
+              ? "bg-gray-500/75 backdrop-blur-md shadow-lg"
+              : "bg-gray-500/40 backdrop-blur-sm"
           }`}
           initial={{ y: -100 }}
           animate={{ y: 0 }}
@@ -173,16 +179,28 @@ const Home: React.FC = () => {
             <span className="text-xl font-bold text-white">PEER SENSE AI</span>
           </div>
           <div className="flex items-center space-x-6">
-            <Link href="/" className="text-sm text-gray-200 hover:text-white transition-colors">
+            <Link
+              href="/"
+              className="text-sm text-gray-200 hover:text-white transition-colors"
+            >
               Home
             </Link>
-            <Link href="/events" className="text-sm text-gray-200 hover:text-white transition-colors">
+            <Link
+              href="/events"
+              className="text-sm text-gray-200 hover:text-white transition-colors"
+            >
               Events
             </Link>
-            <Link href="/docs" className="text-sm text-gray-200 hover:text-white transition-colors">
+            <Link
+              href="/docs"
+              className="text-sm text-gray-200 hover:text-white transition-colors"
+            >
               Docs
             </Link>
-            <Button variant="ghost" className="text-sm text-gray-200 hover:text-white">
+            <Button
+              variant="ghost"
+              className="text-sm text-gray-200 hover:text-white"
+            >
               Login
             </Button>
             <Button className="text-sm bg-white text-gray-900 hover:bg-gray-100">
