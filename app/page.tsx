@@ -166,10 +166,10 @@ const Home: React.FC = () => {
       {/* Navigation */}
       <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center p-4">
         <motion.nav
-          className={`flex items-center justify-between max-w-5xl w-full rounded-full px-8 py-4 transition-all duration-300 border border-gray-1000 ${
+          className={`flex items-center justify-between max-w-5xl w-full rounded-full px-8 py-4 transition-all duration-300 border border-gray-5000 ${
             isScrolled
               ? "bg-blue-550/85 backdrop-blur-md shadow-lg"
-              : "bg-blue-900/75 backdrop-blur-sm"
+              : "bg-blue-998/40 backdrop-blur-sm"
           }`}
           initial={{ y: -100 }}
           animate={{ y: 0 }}
@@ -197,9 +197,11 @@ const Home: React.FC = () => {
             >
               Docs
             </Link>
-            <Button className="text-sm bg-white text-gray-900 hover:bg-gray-100">
-              Download
-            </Button>
+            <a href="/download">
+              <Button className="text-sm bg-white text-gray-900 hover:bg-gray-100">
+                Download
+              </Button>
+            </a>
           </div>
         </motion.nav>
       </div>
@@ -422,18 +424,38 @@ const Home: React.FC = () => {
           we'll respond as soon as possible.
         </p>
         <div className="flex justify-center gap-4">
-          <Button variant="secondary">
-            <Mail className="w-4 h-4 mr-2" />
-            Email Us
-          </Button>
-          <Button variant="secondary">
-            <Twitter className="w-4 h-4 mr-2" />
-            Twitter
-          </Button>
-          <Button variant="secondary">
-            <Github className="w-4 h-4 mr-2" />
-            GitHub
-          </Button>
+          <a
+            href="mailto:dhruvadas77@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button variant="secondary">
+              <Mail className="w-4 h-4 mr-2" />
+              Email Us
+            </Button>
+          </a>
+
+          <a
+            href="https://x.com/Grapefruit60538?t=IsNp3VNTMBDX0hwJ2sF5cg&s=08"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button variant="secondary">
+              <Twitter className="w-4 h-4 mr-2" />
+              Twitter
+            </Button>
+          </a>
+
+          <a
+            href="https://github.com/peer-sense/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button variant="secondary">
+              <Github className="w-4 h-4 mr-2" />
+              GitHub
+            </Button>
+          </a>
         </div>
       </section>
     </div>
@@ -454,34 +476,34 @@ const AIIntegrationShowcase: React.FC = () => {
 
   const aiFeatures = [
     {
-      title: "Natural Language Processing",
+      title: "Personality-Based Scheduling",
       description:
-        "Understand and process your scheduling requests in plain English",
+        "Adapts tasks based on your personality type and suggests optimal times for deep work, meetings, and relaxation.",
     },
     {
-      title: "Predictive Analytics",
+      title: "AI-Powered Task Optimization",
       description:
-        "Forecast your future scheduling needs based on past patterns",
+        "Prioritizes tasks based on urgency and your productivity patterns, automatically adjusting schedules for high-priority tasks.",
     },
     {
-      title: "Machine Learning Optimization",
+      title: "Peer Collaboration & Influence",
       description:
-        "Continuously improve scheduling suggestions as you use the app",
+        "Syncs with team members schedules to optimize group work and avoid conflicts by suggesting the best meeting times.",
     },
     {
-      title: "Sentiment Analysis",
+      title: "Real-Time Adjustments",
       description:
-        "Detect your mood from communication and adjust schedules accordingly",
+        "Detects changes in your work patterns and mood, rescheduling tasks on the fly for enhanced productivity.",
     },
     {
-      title: "Anomaly Detection",
+      title: "Smart Notifications & Reminders",
       description:
-        "Identify unusual patterns in your schedule and suggest improvements",
+        "Keeps you informed with timely alerts for task deadlines, scheduling conflicts, and changes, ensuring you never miss a beat.",
     },
     {
-      title: "Reinforcement Learning",
+      title: "Seamless Integrations",
       description:
-        "Adapt to your preferences over time for personalized scheduling",
+        "Effortlessly connects with Google Calendar, Slack, and more to keep your schedule synchronized across platforms.",
     },
   ];
 
