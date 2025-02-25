@@ -26,7 +26,118 @@ import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { useRef, useEffect, useState, ReactNode } from "react";
 import { TaskFlowAnimation } from "./components/TaskFlowAnimation";
 
-// Home Component
+// Add this new component after the existing imports
+const FeatureTiles = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const features = [
+    {
+      title: "Personalized Scheduling for Individuals",
+      description: "Optimize your daily routine and boost productivity with AI-driven personal scheduling.",
+      icon: <User className="w-12 h-12 text-primary" />,
+      features: [
+        "Smart task prioritization based on your energy levels",
+        "Personalized work-life balance recommendations",
+        "Adaptive scheduling that learns from your habits",
+      ],
+    },
+    {
+      title: "Enterprise-Grade Scheduling Solutions",
+      description: "Streamline your organization's workflow with our corporate scheduling AI.",
+      icon: <Briefcase className="w-12 h-12 text-primary" />,
+      features: [
+        "Efficient team coordination and resource allocation",
+        "Automated meeting scheduling across departments",
+        "Data-driven insights for optimizing corporate productivity",
+      ],
+    },
+    {
+      title: "Enhance Team Collaboration",
+      description: "Foster seamless teamwork with AI-powered group scheduling and task management.",
+      icon: <Users className="w-12 h-12 text-primary" />,
+      features: [
+        "Intelligent meeting time suggestions for optimal attendance",
+        "Collaborative task boards with AI-assisted assignments",
+        "Real-time updates and notifications for team members",
+      ],
+    },
+    {
+      title: "Insightful Analytics Dashboard",
+      description: "Gain valuable insights into your productivity and team performance.",
+      icon: <BarChart className="w-12 h-12 text-primary" />,
+      features: [
+        "Comprehensive productivity reports and trends",
+        "Time allocation analysis for individuals and teams",
+        "AI-generated recommendations for efficiency improvements",
+      ],
+    },
+  ];
+
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  return (
+    <section className="py-24 px-4 bg-black/20">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          ref={ref}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              transition={{ duration: 0.5 }}
+              className="bg-black/40 backdrop-blur-sm rounded-xl p-8 hover:bg-black/50 transition-all duration-300"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="p-3 rounded-lg bg-primary/10">
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-semibold">{feature.title}</h3>
+              </div>
+              <p className="text-muted-foreground mb-6">{feature.description}</p>
+              <ul className="space-y-3">
+                {feature.features.map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-sm">
+                    <svg
+                      className="h-5 w-5 flex-shrink-0 text-primary"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
 const Home: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const { scrollY } = useScroll();
@@ -45,37 +156,38 @@ const Home: React.FC = () => {
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    // Added overflow-x-hidden to prevent horizontal scrolling
     <div className="min-h-screen overflow-x-hidden">
       {/* Navigation */}
       <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center p-4">
         <motion.nav
           className={`flex items-center justify-between max-w-5xl w-full rounded-full px-8 py-4 transition-all duration-300 ${
             isScrolled
-              ? "bg-white/70 backdrop-blur-md shadow-lg" // Changed from bg-black/70 to bg-white/70
-              : "bg-transparent"
+              ? "bg-gray-900/75 backdrop-blur-md shadow-lg"
+              : "bg-gray-900/40 backdrop-blur-sm"
           }`}
           initial={{ y: -100 }}
           animate={{ y: 0 }}
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
         >
           <div className="flex items-center space-x-2">
-            <span className="text-xl font-bold">PEER SENSE AI</span>
+            <span className="text-xl font-bold text-white">PEER SENSE AI</span>
           </div>
           <div className="flex items-center space-x-6">
-            <Link href="/" className="text-sm hover:text-primary">
+            <Link href="/" className="text-sm text-gray-200 hover:text-white transition-colors">
               Home
             </Link>
-            <Link href="/events" className="text-sm hover:text-primary">
+            <Link href="/events" className="text-sm text-gray-200 hover:text-white transition-colors">
               Events
             </Link>
-            <Link href="/docs" className="text-sm hover:text-primary">
+            <Link href="/docs" className="text-sm text-gray-200 hover:text-white transition-colors">
               Docs
             </Link>
-            <Button variant="ghost" className="text-sm">
+            <Button variant="ghost" className="text-sm text-gray-200 hover:text-white">
               Login
             </Button>
-            <Button className="text-sm">Register</Button>
+            <Button className="text-sm bg-white text-gray-900 hover:bg-gray-100">
+              Register
+            </Button>
           </div>
         </motion.nav>
       </div>
@@ -132,6 +244,9 @@ const Home: React.FC = () => {
       {/* AI Integration Showcase */}
       <AIIntegrationShowcase />
 
+      {/* Feature Tiles */}
+      <FeatureTiles />
+
       {/* Productivity Insights */}
       <ProductivityInsightsSection />
 
@@ -140,66 +255,6 @@ const Home: React.FC = () => {
 
       {/* Getting Started Steps */}
       <GettingStartedSteps />
-
-      {/* For Individuals Section */}
-      <Section
-        title="Personalized Scheduling for Individuals"
-        description="Optimize your daily routine and boost productivity with AI-driven personal scheduling."
-        icon={<User className="w-12 h-12 text-primary" />}
-      >
-        <FeatureList
-          features={[
-            "Smart task prioritization based on your energy levels",
-            "Personalized work-life balance recommendations",
-            "Adaptive scheduling that learns from your habits",
-          ]}
-        />
-      </Section>
-
-      {/* For Corporations Section */}
-      <Section
-        title="Enterprise-Grade Scheduling Solutions"
-        description="Streamline your organization's workflow with our corporate scheduling AI."
-        icon={<Briefcase className="w-12 h-12 text-primary" />}
-      >
-        <FeatureList
-          features={[
-            "Efficient team coordination and resource allocation",
-            "Automated meeting scheduling across departments",
-            "Data-driven insights for optimizing corporate productivity",
-          ]}
-        />
-      </Section>
-
-      {/* Team Collaboration Section */}
-      <Section
-        title="Enhance Team Collaboration"
-        description="Foster seamless teamwork with AI-powered group scheduling and task management."
-        icon={<Users className="w-12 h-12 text-primary" />}
-      >
-        <FeatureList
-          features={[
-            "Intelligent meeting time suggestions for optimal attendance",
-            "Collaborative task boards with AI-assisted assignments",
-            "Real-time updates and notifications for team members",
-          ]}
-        />
-      </Section>
-
-      {/* Analytics Dashboard Section */}
-      <Section
-        title="Insightful Analytics Dashboard"
-        description="Gain valuable insights into your productivity and team performance."
-        icon={<BarChart className="w-12 h-12 text-primary" />}
-      >
-        <FeatureList
-          features={[
-            "Comprehensive productivity reports and trends",
-            "Time allocation analysis for individuals and teams",
-            "AI-generated recommendations for efficiency improvements",
-          ]}
-        />
-      </Section>
 
       {/* Features Section */}
       <section className="py-24 px-4">
