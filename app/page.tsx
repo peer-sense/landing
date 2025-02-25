@@ -168,8 +168,8 @@ const Home: React.FC = () => {
         <motion.nav
           className={`flex items-center justify-between max-w-5xl w-full rounded-full px-8 py-4 transition-all duration-300 border border-gray-700 ${
             isScrolled
-              ? "bg-gray-750/85 backdrop-blur-md shadow-lg"
-              : "bg-gray-900/40 backdrop-blur-sm"
+              ? "bg-blue-750/85 backdrop-blur-md shadow-lg"
+              : "bg-blue-900/40 backdrop-blur-sm"
           }`}
           initial={{ y: -100 }}
           animate={{ y: 0 }}
