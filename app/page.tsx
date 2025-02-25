@@ -205,11 +205,14 @@ const Home: React.FC = () => {
               Events
             </Link>
             <Link
-              href="/docs"
+              href="https://peer-sense.github.io/docs"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-sm text-gray-200 hover:text-white transition-colors"
             >
               Docs
             </Link>
+
             <a href="/download">
               <Button className="text-sm bg-white text-gray-900 hover:bg-gray-100">
                 Download
