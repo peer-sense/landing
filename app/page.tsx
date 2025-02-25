@@ -1,10 +1,15 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import Link from "next/link"
-import { ProductivityInsightsSection } from "./components/ProductivityInsights"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import Link from "next/link";
+import { ProductivityInsightsSection } from "./components/ProductivityInsights";
 import {
   Github,
   Mail,
@@ -16,28 +21,28 @@ import {
   Brain,
   Sliders,
   Rocket,
-  LineChart,
-} from "lucide-react"
-import { motion, useScroll, useTransform, useInView, useSpring } from "framer-motion"
-import { useRef, useEffect, useState } from "react"
-import { TaskFlowAnimation } from "./components/TaskFlowAnimation"
+} from "lucide-react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { useRef, useEffect, useState, ReactNode } from "react";
+import { TaskFlowAnimation } from "./components/TaskFlowAnimation";
 
-export default function Home() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const { scrollY } = useScroll()
+// Home Component
+const Home: React.FC = () => {
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const { scrollY } = useScroll();
 
   useEffect(() => {
-    const unsubscribe = scrollY.onChange((latest) => {
-      setIsScrolled(latest > 50)
-    })
-    return () => unsubscribe()
-  }, [scrollY])
+    const unsubscribe = scrollY.onChange((latest: number) => {
+      setIsScrolled(latest > 50);
+    });
+    return () => unsubscribe();
+  }, [scrollY]);
 
-  const heroRef = useRef(null)
-  const isHeroInView = useInView(heroRef, { once: true })
+  const heroRef = useRef<HTMLDivElement>(null);
+  const isHeroInView = useInView(heroRef, { once: true });
 
-  const heroTextY = useTransform(scrollY, [0, 300], [0, 100])
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0])
+  const heroTextY = useTransform(scrollY, [0, 300], [0, 100]);
+  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
     <div className="min-h-screen">
@@ -45,7 +50,9 @@ export default function Home() {
       <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center p-4">
         <motion.nav
           className={`flex items-center justify-between max-w-5xl w-full rounded-full px-8 py-4 transition-all duration-300 ${
-            isScrolled ? "bg-black/70 backdrop-blur-md shadow-lg" : "bg-transparent"
+            isScrolled
+              ? "bg-black/70 backdrop-blur-md shadow-lg"
+              : "bg-transparent"
           }`}
           initial={{ y: -100 }}
           animate={{ y: 0 }}
@@ -81,14 +88,16 @@ export default function Home() {
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         <TaskFlowAnimation />
-        <motion.div 
+        <motion.div
           style={{ y: heroTextY, opacity: heroOpacity }}
           className="relative z-10"
         >
           <motion.h1
             className="text-4xl md:text-6xl font-bold max-w-3xl mx-auto bg-clip-text"
             initial={{ y: 20, opacity: 0 }}
-            animate={isHeroInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+            animate={
+              isHeroInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }
+            }
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             AI-Powered Task Management
@@ -96,11 +105,14 @@ export default function Home() {
           <motion.p
             className="text-muted-foreground max-w-2xl mx-auto mt-4"
             initial={{ y: 20, opacity: 0 }}
-            animate={isHeroInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+            animate={
+              isHeroInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }
+            }
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            Experience the future of productivity with PeerSense AI. Our intelligent system adapts to your work style,
-            making task management effortless and intuitive.
+            Experience the future of productivity with PeerSense AI. Our
+            intelligent system adapts to your work style, making task management
+            effortless and intuitive.
           </motion.p>
         </motion.div>
         <motion.div
@@ -190,9 +202,12 @@ export default function Home() {
 
       {/* Features Section */}
       <section className="py-24 px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">Intelligent Features</h2>
+        <h2 className="text-3xl font-bold text-center mb-12">
+          Intelligent Features
+        </h2>
         <p className="text-muted-foreground text-center mb-16 max-w-2xl mx-auto">
-          Experience the next generation of scheduling with our AI-powered features
+          Experience the next generation of scheduling with our AI-powered
+          features
         </p>
         <div className="grid gap-6 max-w-5xl mx-auto">
           <FeatureCard
@@ -225,61 +240,85 @@ export default function Home() {
 
       {/* FAQ Section */}
       <section className="py-24 px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+        <h2 className="text-3xl font-bold text-center mb-12">
+          Frequently Asked Questions
+        </h2>
         <div className="max-w-3xl mx-auto">
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">
               <AccordionTrigger>How does Calendar AI work?</AccordionTrigger>
               <AccordionContent>
-                Calendar AI uses advanced machine learning algorithms to analyze your behavior, preferences, and energy
-                patterns throughout the day. It integrates seamlessly with your existing calendar (like Google Calendar)
-                and dynamically adapts your schedule. Based on your productivity and mood, it recommends optimal times
-                for tasks, meetings, and breaks, ensuring you work smarter, not harder.
+                Calendar AI uses advanced machine learning algorithms to analyze
+                your behavior, preferences, and energy patterns throughout the
+                day. It integrates seamlessly with your existing calendar (like
+                Google Calendar) and dynamically adapts your schedule. Based on
+                your productivity and mood, it recommends optimal times for
+                tasks, meetings, and breaks, ensuring you work smarter, not
+                harder.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">
-              <AccordionTrigger>When will the product be available?</AccordionTrigger>
+              <AccordionTrigger>
+                When will the product be available?
+              </AccordionTrigger>
               <AccordionContent>
-                PeerSense AI is currently in the beta phase, and we're actively refining the product based on user
-                feedback. We plan to officially launch the full version in Q2 2025. Stay tuned for updates, and feel
-                free to join the waitlist for early access!
+                PeerSense AI is currently in the beta phase, and we're actively
+                refining the product based on user feedback. We plan to
+                officially launch the full version in Q2 2025. Stay tuned for
+                updates, and feel free to join the waitlist for early access!
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
               <AccordionTrigger>Is my calendar data secure?</AccordionTrigger>
               <AccordionContent>
-                We take your privacy and security seriously. PeerSense AI uses end-to-end encryption to protect your
-                calendar data. We also follow best practices in data security to ensure that your personal information
-                remains private. Additionally, we never access or share your data without your explicit permission
+                We take your privacy and security seriously. PeerSense AI uses
+                end-to-end encryption to protect your calendar data. We also
+                follow best practices in data security to ensure that your
+                personal information remains private. Additionally, we never
+                access or share your data without your explicit permission.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-4">
-              <AccordionTrigger>What calendar platforms are supported?</AccordionTrigger>
+              <AccordionTrigger>
+                What calendar platforms are supported?
+              </AccordionTrigger>
               <AccordionContent>
-                Currently, PeerSense AI supports Google Calendar for seamless integration, with plans to expand to other
-                platforms like Microsoft Outlook and Apple Calendar in the near future. Stay updated as we add more
-                calendar platforms to make scheduling even easier for you.
+                Currently, PeerSense AI supports Google Calendar for seamless
+                integration, with plans to expand to other platforms like
+                Microsoft Outlook and Apple Calendar in the near future. Stay
+                updated as we add more calendar platforms to make scheduling
+                even easier for you.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-5">
-              <AccordionTrigger>How does personality-based scheduling work?</AccordionTrigger>
+              <AccordionTrigger>
+                How does personality-based scheduling work?
+              </AccordionTrigger>
               <AccordionContent>
-                When you sign up, PeerSense AI asks you a series of questions about your work habits, focus patterns,
-                and collaboration style. Using this data, AI assigns a personalized scheduling profile and continuously
-                refines it over time.
+                When you sign up, PeerSense AI asks you a series of questions
+                about your work habits, focus patterns, and collaboration style.
+                Using this data, AI assigns a personalized scheduling profile
+                and continuously refines it over time.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-6">
-              <AccordionTrigger>Can I change my personality type manually?</AccordionTrigger>
+              <AccordionTrigger>
+                Can I change my personality type manually?
+              </AccordionTrigger>
               <AccordionContent>
-                No, but the AI *adjusts dynamically* based on your work patterns. If your schedule feels incorrect, go
-                to *Settings - Work Preferences* and adjust your scheduling needs.
+                No, but the AI <em>adjusts dynamically</em> based on your work
+                patterns. If your schedule feels incorrect, go to{" "}
+                <em>Settings - Work Preferences</em> and adjust your scheduling
+                needs.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-7">
-              <AccordionTrigger>Does PeerSense AI support team-wide scheduling?</AccordionTrigger>
+              <AccordionTrigger>
+                Does PeerSense AI support team-wide scheduling?
+              </AccordionTrigger>
               <AccordionContent>
-                Yes! It syncs with your teams Google Calendars to *optimize meeting times* and collaboration.
+                Yes! It syncs with your teams Google Calendars to{" "}
+                <em>optimize meeting times</em> and collaboration.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -288,7 +327,9 @@ export default function Home() {
 
       {/* Testimonials Section */}
       <section className="py-24 px-4 bg-gradient-to-b from-black to-gray-900">
-        <h2 className="text-3xl font-bold text-center mb-12">What Our Users Say</h2>
+        <h2 className="text-3xl font-bold text-center mb-12">
+          What Our Users Say
+        </h2>
         <div className="max-w-6xl mx-auto grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           <TestimonialCard
             quote="PeerSense AI has revolutionized how I manage my time. It's like having a personal assistant that truly understands my work style."
@@ -309,7 +350,8 @@ export default function Home() {
       <section className="py-24 px-4 text-center">
         <h2 className="text-3xl font-bold mb-6">Get in Touch</h2>
         <p className="text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+          Have questions? We'd love to hear from you. Send us a message and
+          we'll respond as soon as possible.
         </p>
         <div className="flex justify-center gap-4">
           <Button variant="secondary">
@@ -327,17 +369,53 @@ export default function Home() {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-function AIIntegrationShowcase() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+export default Home;
+
+// AIIntegrationShowcase Component
+const AIIntegrationShowcase: React.FC = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0 },
-  }
+  };
+
+  const aiFeatures = [
+    {
+      title: "Natural Language Processing",
+      description:
+        "Understand and process your scheduling requests in plain English",
+    },
+    {
+      title: "Predictive Analytics",
+      description:
+        "Forecast your future scheduling needs based on past patterns",
+    },
+    {
+      title: "Machine Learning Optimization",
+      description:
+        "Continuously improve scheduling suggestions as you use the app",
+    },
+    {
+      title: "Sentiment Analysis",
+      description:
+        "Detect your mood from communication and adjust schedules accordingly",
+    },
+    {
+      title: "Anomaly Detection",
+      description:
+        "Identify unusual patterns in your schedule and suggest improvements",
+    },
+    {
+      title: "Reinforcement Learning",
+      description:
+        "Adapt to your preferences over time for personalized scheduling",
+    },
+  ];
 
   return (
     <Section
@@ -358,33 +436,12 @@ function AIIntegrationShowcase() {
           },
         }}
       >
-        {[
-          {
-            title: "Natural Language Processing",
-            description: "Understand and process your scheduling requests in plain English",
-          },
-          {
-            title: "Predictive Analytics",
-            description: "Forecast your future scheduling needs based on past patterns",
-          },
-          {
-            title: "Machine Learning Optimization",
-            description: "Continuously improve scheduling suggestions as you use the app",
-          },
-          {
-            title: "Sentiment Analysis",
-            description: "Detect your mood from communication and adjust schedules accordingly",
-          },
-          {
-            title: "Anomaly Detection",
-            description: "Identify unusual patterns in your schedule and suggest improvements",
-          },
-          {
-            title: "Reinforcement Learning",
-            description: "Adapt to your preferences over time for personalized scheduling",
-          },
-        ].map((item, index) => (
-          <motion.div key={index} variants={cardVariants} transition={{ duration: 0.5 }}>
+        {aiFeatures.map((item, index) => (
+          <motion.div
+            key={index}
+            variants={cardVariants}
+            transition={{ duration: 0.5 }}
+          >
             <Card className="h-full">
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
@@ -395,12 +452,13 @@ function AIIntegrationShowcase() {
         ))}
       </motion.div>
     </Section>
-  )
-}
+  );
+};
 
-function CustomizationOptions() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+// CustomizationOptions Component
+const CustomizationOptions: React.FC = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const containerVariants = {
     hidden: {},
@@ -409,12 +467,21 @@ function CustomizationOptions() {
         staggerChildren: 0.1,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, x: -20 },
     visible: { opacity: 1, x: 0 },
-  }
+  };
+
+  const options: string[] = [
+    "Personalized UI themes",
+    "Custom notification settings",
+    "Flexible scheduling rules",
+    "Integration with your favorite tools",
+    "Customizable AI behavior",
+    "Tailored reporting and analytics",
+  ];
 
   return (
     <Section
@@ -422,22 +489,24 @@ function CustomizationOptions() {
       description="Tailor PeerSense AI to fit your unique workflow and preferences"
       icon={<Sliders className="w-12 h-12 text-primary" />}
     >
-      <motion.div ref={ref} variants={containerVariants} initial="hidden" animate={isInView ? "visible" : "hidden"}>
-        {[
-          "Personalized UI themes",
-          "Custom notification settings",
-          "Flexible scheduling rules",
-          "Integration with your favorite tools",
-          "Customizable AI behavior",
-          "Tailored reporting and analytics",
-        ].map((option, index) => (
+      <motion.div
+        ref={ref}
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
+        {options.map((option, index) => (
           <motion.div
             key={index}
             variants={itemVariants}
             transition={{ duration: 0.5 }}
             className="flex items-center space-x-3 mb-4"
           >
-            <svg className="h-5 w-5 flex-shrink-0 text-primary" fill="currentColor" viewBox="0 0 20 20">
+            <svg
+              className="h-5 w-5 flex-shrink-0 text-primary"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
               <path
                 fillRule="evenodd"
                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -449,12 +518,13 @@ function CustomizationOptions() {
         ))}
       </motion.div>
     </Section>
-  )
-}
+  );
+};
 
-function GettingStartedSteps() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+// GettingStartedSteps Component
+const GettingStartedSteps: React.FC = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const containerVariants = {
     hidden: {},
@@ -463,19 +533,28 @@ function GettingStartedSteps() {
         staggerChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
-  }
+  };
 
   const steps = [
     { title: "Sign Up", description: "Create your PeerSense AI account" },
-    { title: "Connect Calendar", description: "Integrate with your existing calendar" },
-    { title: "Set Preferences", description: "Customize AI to match your work style" },
-    { title: "Start Scheduling", description: "Let AI optimize your daily routine" },
-  ]
+    {
+      title: "Connect Calendar",
+      description: "Integrate with your existing calendar",
+    },
+    {
+      title: "Set Preferences",
+      description: "Customize AI to match your work style",
+    },
+    {
+      title: "Start Scheduling",
+      description: "Let AI optimize your daily routine",
+    },
+  ];
 
   return (
     <Section
@@ -491,7 +570,12 @@ function GettingStartedSteps() {
         animate={isInView ? "visible" : "hidden"}
       >
         {steps.map((step, index) => (
-          <motion.div key={index} variants={itemVariants} transition={{ duration: 0.5 }} className="text-center">
+          <motion.div
+            key={index}
+            variants={itemVariants}
+            transition={{ duration: 0.5 }}
+            className="text-center"
+          >
             <motion.div
               className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary flex items-center justify-center text-2xl font-bold"
               whileHover={{ scale: 1.1 }}
@@ -505,20 +589,24 @@ function GettingStartedSteps() {
         ))}
       </motion.div>
     </Section>
-  )
+  );
+};
+
+// Props interface for FeatureCard
+interface FeatureCardProps {
+  title: string;
+  highlight: string;
+  description: string;
 }
 
-function FeatureCard({
+// FeatureCard Component
+const FeatureCard: React.FC<FeatureCardProps> = ({
   title,
   highlight,
   description,
-}: {
-  title: string
-  highlight: string
-  description: string
-}) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <motion.div
@@ -535,12 +623,26 @@ function FeatureCard({
         </CardContent>
       </Card>
     </motion.div>
-  )
+  );
+};
+
+// Props interface for Section component
+interface SectionProps {
+  title: string;
+  description: string;
+  icon: ReactNode;
+  children: ReactNode;
 }
 
-function Section({ title, description, icon, children }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+// Section Component
+const Section: React.FC<SectionProps> = ({
+  title,
+  description,
+  icon,
+  children,
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <motion.section
@@ -553,14 +655,22 @@ function Section({ title, description, icon, children }) {
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-center mb-8">{icon}</div>
         <h2 className="text-3xl font-bold text-center mb-4">{title}</h2>
-        <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">{description}</p>
+        <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+          {description}
+        </p>
         {children}
       </div>
     </motion.section>
-  )
+  );
+};
+
+// Props interface for FeatureList component
+interface FeatureListProps {
+  features: string[];
 }
 
-function FeatureList({ features }) {
+// FeatureList Component
+const FeatureList: React.FC<FeatureListProps> = ({ features }) => {
   return (
     <ul className="space-y-4">
       {features.map((feature, index) => (
@@ -571,7 +681,11 @@ function FeatureList({ features }) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
         >
-          <svg className="h-5 w-5 flex-shrink-0 text-primary" fill="currentColor" viewBox="0 0 20 20">
+          <svg
+            className="h-5 w-5 flex-shrink-0 text-primary"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
             <path
               fillRule="evenodd"
               d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -582,12 +696,19 @@ function FeatureList({ features }) {
         </motion.li>
       ))}
     </ul>
-  )
+  );
+};
+
+// Props interface for TestimonialCard component
+interface TestimonialCardProps {
+  quote: string;
+  author: string;
 }
 
-function TestimonialCard({ quote, author }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-50px" })
+// TestimonialCard Component
+const TestimonialCard: React.FC<TestimonialCardProps> = ({ quote, author }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <motion.div
@@ -600,5 +721,5 @@ function TestimonialCard({ quote, author }) {
       <p className="text-lg mb-4">"{quote}"</p>
       <p className="text-sm text-muted-foreground">- {author}</p>
     </motion.div>
-  )
-}
+  );
+};
